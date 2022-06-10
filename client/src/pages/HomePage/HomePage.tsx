@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import { Stack, Theme } from '@mui/material';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -28,21 +28,21 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 export const HomePage = () => {
     const classes = useStyles();
+
+    const generateContractUrl = () => "";
+
     return (
         <Box className={classes.root}>
             <Paper className={classes.container}>
-                <>
-                    We were not able to detect <strong>MetaMask</strong>. We value <strong>privacy and security</strong>
-                    a lot so we limit the wallet options on the DAPP.<br />
-                    <br />
-                    But don't worry! <span className="emoji">😃</span> You can always interact with the smart-contract
-                    through <a href="#" target="_blank">123</a> and <strong>we do our best to provide you with the best
-                    user experience possible</strong>, even from there.<br />
-                    <br />
-                    You can also get your <strong>Whitelist Proof</strong> manually, using the tool below.
-                </>,
-                <br />
-                <Button variant="contained">Connect wallet</Button>
+                <Stack direction='column' gap="15px">
+                    <img loading='lazy' width="100%" src="/logo.png" />
+                    <span>
+                        Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
+                        You can interact with the smart-contract <strong>directly</strong> through <strong>Etherscan</strong>, without even
+                        connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
+                    </span>
+                    <Button variant="contained">Connect wallet</Button>
+                </Stack>
             </Paper>
         </Box>
     );

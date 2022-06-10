@@ -4,10 +4,6 @@ import { singleshot } from "react-declarative";
 
 import Web3 from "web3";
 
-import waitForEvent from '../../utils/waitForEvent';
-
-import { CC_WEB3_HTTP_RPC } from "../../config";
-
 interface IWindowExtended extends Window {
     ethereum: any;
     web3: any;
@@ -23,8 +19,16 @@ export class Web3Service {
         return !!this._web3;
     };
 
-    get isMetaMask() {
-        return window.ethereum?.isMetaMask;
+    get isWeb3Available() {
+        return !!window.ethereum;
+    };
+
+    get isAccountEnabled() {
+        return !!window.ethereum.selectedAddress;
+    };
+
+    get currentAccount() {
+        return this._web3?.eth.defaultAccount || null;
     };
 
     get eth() {
@@ -39,25 +43,22 @@ export class Web3Service {
         makeAutoObservable(this);
     };
 
-    connect = singleshot(async () => {
-        console.log("Web3Service connect started");
+    connect = async () => {
+        if (!this.isAccountEnabled) {
+            await window.ethereum.request({ method: 'eth_requestAccounts' });   
+        }
+    };
+
+    prefetch = singleshot(async () => {
+        console.log("Web3Service prefetch started");
         try {
             if (window.ethereum) {
-                console.log("Modern (eip-1102) web3 detected.");
+                console.log("Web3Service prefetch eip-1102 detected");
                 const web3 = new Web3(window.ethereum);
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
                 runInAction(() => this._web3 = web3);
-                return true;
-            } else if (window.web3) {
-                console.log("Injected (legacy) web3 detected.");
-                this._web3 = window.web3;
-                return true;
-            } else {
-                return false;
             }
         } catch (e) {
             console.warn('Web3Service prefetch failed', e);
-            return false;
         }
     });
 
