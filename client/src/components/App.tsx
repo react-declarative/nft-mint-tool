@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import { Switch } from 'react-declarative';
 
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
 
@@ -16,7 +15,7 @@ import ioc from '../lib/ioc';
 
 const useStyles = makeStyles({
   loaderBar: {
-    marginTop: -4,
+    marginBottom: -4,
   },
 });
 
@@ -32,7 +31,7 @@ const App = () => {
   const handleLoadEnd = () => setLoader(false);
 
   return (
-    <Container>
+    <Box>
       {loader && (
         <Box className={classes.loaderBar}>
           <LinearProgress color="secondary" />
@@ -46,7 +45,7 @@ const App = () => {
         onLoadStart={handleLoadStart}
         onLoadEnd={handleLoadEnd}
       />
-    </Container>
+    </Box>
   );
 };
 
