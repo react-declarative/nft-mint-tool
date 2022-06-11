@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
 
+import Footer from './common/Footer';
+
 import routes from '../routes';
 
 import ioc from '../lib/ioc';
@@ -45,6 +47,7 @@ const App = () => {
         onLoadStart={handleLoadStart}
         onLoadEnd={handleLoadEnd}
       />
+      <Footer />
     </Box>
   );
 };

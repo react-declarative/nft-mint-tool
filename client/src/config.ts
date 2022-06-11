@@ -22,4 +22,6 @@ export const CC_WHITELIST_ADDRESSES = [
 
 export const CC_CONTRACT_ADDRESS = '0x82171F1b79bC01e64C2b9471E2C505814AFEf31A';
 
+export const CC_ETHERSCAN_URL = `https://etherscan.io/address/${CC_CONTRACT_ADDRESS}`;
+
 export const CC_CONTRACT_ABI = ContractAbi.abi;

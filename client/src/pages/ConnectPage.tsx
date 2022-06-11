@@ -6,7 +6,10 @@ import { Theme } from '@mui/material';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+
+import { CC_ETHERSCAN_URL } from '../config';
 
 import ioc from '../lib/ioc';
 
@@ -38,7 +41,7 @@ export const ConnectPage = () => {
                     <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
                     <span>
                         Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
-                        You can interact with the smart-contract <strong>directly</strong> through <strong>Etherscan</strong>, without even
+                        You can interact with the smart-contract <strong>directly</strong> through <Link href={CC_ETHERSCAN_URL}><strong>Etherscan</strong></Link>, without even
                         connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
                     </span>
                     <Button
