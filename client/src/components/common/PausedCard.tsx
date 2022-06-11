@@ -43,8 +43,8 @@ export const PausedCard = ({
         >
             <span className="emoji">⏳</span>
             <Typography style={{ textAlign: 'center' }}>
-                The contract is <strong>paused</strong>.<br /> 
-                Please come back during the next sale!
+                The sale is <strong>paused</strong>.<br /> 
+                Please come back during the next wave!
             </Typography>
         </Paper>
     );
