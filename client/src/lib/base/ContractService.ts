@@ -3,26 +3,24 @@ import { inject, singleshot } from "react-declarative";
 
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
-import { Network } from 'web3-net';
+import { Unit } from 'web3-utils';
+
+import { toWei } from 'web3-utils';
 
 import Web3Service from "./Web3Service";
 
 import TYPES from "../types";
 
-import ContractAbi from "../../contracts/MyToken.json";
+import ContractAbi from "../../contracts/SendMoneyExample.json";
 
 export class ContractService {
 
     readonly web3Service = inject<Web3Service>(TYPES.web3Service);
 
-    _instance: Contract = null as never;
+    private _instance: Contract = null as never;
 
     get isContractConnected() {
         return !!this._instance;
-    };
-
-    get instance() {
-        return this._instance;
     };
 
     get contractAbi(): AbiItem {
@@ -39,14 +37,23 @@ export class ContractService {
         return deployedNetwork?.address || null;
     };
 
-    setValue = async () => {
-        const accounts = await this.web3Service.eth.getAccounts();
-        await this.instance.methods.sampleMethod(5).send({ from: accounts[0] });
+    sendEtherValue = async (method: string, ethers: number, ...args: any) => {
+        const amountToSend = toWei(ethers.toString(), "ether");
+        const account = this.web3Service.selectedAddress;
+        await this._instance.methods[method](...args).send({
+            from: account,
+            value: amountToSend,
+        });
     };
 
-    getValue = async () => {
-        const response = await this.instance.methods.get().call();
-        return response;
+    writeValue = async (method: string, ...args: any[]) => {
+        const account = this.web3Service.selectedAddress;
+        await this._instance.methods[method](...args).send({ from: account });
+    };
+
+    readValue = async (method: string) => {
+        const response = await this._instance.methods[method].call();
+        debugger
     };
 
     prefetch = async () => {

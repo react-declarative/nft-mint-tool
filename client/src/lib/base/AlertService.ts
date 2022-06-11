@@ -9,11 +9,11 @@ interface IAlert {
 
 export class AlertService {
     
-    alerts: IAlert[] = [];
+    private _alerts: IAlert[] = [];
 
     get current() {
-        if (this.alerts.length) {
-            return this.alerts[0];
+        if (this._alerts.length) {
+            return this._alerts[0];
         } else {
             return null;
         }
@@ -24,19 +24,19 @@ export class AlertService {
     }
     
     hideCurrent = () => {
-        if (this.alerts.length > 0) {
-            this.alerts.shift();
+        if (this._alerts.length > 0) {
+            this._alerts.shift();
         }
     };
 
     notify = (message: string) => {
         this.hideCurrent();
-        this.alerts.push({
+        this._alerts.push({
             key: randomString(),
             message, 
         });
     };
 
-}
+};
 
 export default AlertService;

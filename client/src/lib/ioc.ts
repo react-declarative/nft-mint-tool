@@ -1,5 +1,6 @@
+import process from "process";
 
-import { inject, serviceManager, singleshot } from 'react-declarative';
+import { inject } from 'react-declarative';
 
 import ContractService from "./base/ContractService";
 import MerkleTreeService from "./base/MerkleTreeService";
@@ -8,6 +9,7 @@ import AlertService from "./base/AlertService";
 import RouterService from './base/RouterService';
 
 import ConnectPageService from './view/ConnectPageService';
+import MintPageService from './view/MintPageService';
 
 import "./config"
 
@@ -23,6 +25,7 @@ const baseServices = {
 
 const viewServices = {
     connectPageService: inject<ConnectPageService>(TYPES.connectPageService),
+    mintPageService: inject<MintPageService>(TYPES.mintPageService),
 };
 
 export const ioc = {
@@ -30,14 +33,8 @@ export const ioc = {
     ...viewServices,
 };
 
-export const init = singleshot(async () => {
-    try {
-        await serviceManager.prefetch();
-    } catch(e) {
-        console.warn('ioc init failed', e);
-    }
-});
-
-(window as any).ioc = ioc;
+// if (process.env.NODE_ENV === 'development') {
+    (window as any).ioc = ioc;
+// }
 
 export default ioc;

@@ -8,6 +8,7 @@ const baseServices = {
 
 const viewServices = {
     connectPageService: Symbol.for('connectPageService'),
+    mintPageService: Symbol.for('mintPageService'),
 };
 
 export const TYPES = {

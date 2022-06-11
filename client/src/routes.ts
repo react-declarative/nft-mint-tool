@@ -28,16 +28,17 @@ const routes: ISwitchItem[] = [
         },
     },
     {
+        path: '/mint-page',
+        prefetch: () => ioc.contractService.prefetch(),
+        element: MintPage,
+    },
+    {
         path: '/permission-page',
         element: PermissionPage,
     },
     {
         path: '/nometamask-page',
         element: NoMetamaskPage,
-    },
-    {
-        path: '/mint-page',
-        element: MintPage,
     },
 ];
 

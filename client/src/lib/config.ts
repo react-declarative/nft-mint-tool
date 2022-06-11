@@ -5,6 +5,7 @@ import ContractService from "./base/ContractService";
 import MerkleTreeService from './base/MerkleTreeService';
 import AlertService from './base/AlertService';
 import RouterService from './base/RouterService';
+import MintPageService from './view/MintPageService';
 
 import ConnectPageService from './view/ConnectPageService';
 
@@ -17,3 +18,4 @@ provide(TYPES.alertService, () => new AlertService());
 provide(TYPES.routerService, () => new RouterService());
 
 provide(TYPES.connectPageService, () => new ConnectPageService());
+provide(TYPES.mintPageService, () => new MintPageService());

@@ -13,62 +13,63 @@ export class RouterService implements BrowserHistory {
 
   constructor() {
     makeAutoObservable(this)
-  }
+  };
 
-  updateState() {
+  updateState = () => {
     const { location, action } = browserHistory;
     this.previousPath = this.location?.pathname || '/';
     this.location = location;
     this.action = action;
-  }
+  };
 
-  createHref(to: To) {
+  createHref = (to: To) => {
     const result = browserHistory.createHref(to);
     this.updateState();
     return result;
-  }
+  };
 
-  push(to: To, state?: State) {
+  push = (to: To, state?: State) => {
     const result = browserHistory.push(to, state);
     this.updateState();
     return result;
-  }
+  };
 
-  replace(to: To, state?: State) {
+  replace = (to: To, state?: State) => {
     const result = browserHistory.replace(to, state);
     this.updateState();
     return result;
-  }
+  };
 
-  go(delta: number) {
+  go = (delta: number) => {
     const result = browserHistory.go(delta);
     this.updateState();
     return result;
-  }
+  };
 
-  back() {
+  back = () => {
     const result = browserHistory.back();
     this.updateState();
     return result;
-  }
+  };
 
-  forward() {
+  forward = () => {
     const result = browserHistory.forward();
     this.updateState();
     return result;
-  }
+  };
 
-  listen(listener: Listener) {
+  listen = (listener: Listener) => {
     const result = browserHistory.listen(listener);
     this.updateState();
     return result;
-  }
+  };
 
-  block(blocker: Blocker) {
+  block = (blocker: Blocker) => {
     const result = browserHistory.block(blocker);
     this.updateState();
     return result;
-  }
+  };
+
 };
 
 export default RouterService;
