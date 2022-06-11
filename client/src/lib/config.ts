@@ -1,6 +1,6 @@
 import { provide } from 'react-declarative';
 
-import Web3Service from "./base/Web3Service";
+import EthersService from "./base/EthersService";
 import ContractService from "./base/ContractService";
 import MerkleTreeService from './base/MerkleTreeService';
 import AlertService from './base/AlertService';
@@ -12,7 +12,7 @@ import ConnectPageService from './view/ConnectPageService';
 import TYPES from "./types";
 
 provide(TYPES.contractService, () => new ContractService());
-provide(TYPES.web3Service, () => new Web3Service());
+provide(TYPES.ethersService, () => new EthersService());
 provide(TYPES.merkleTreeService, () => new MerkleTreeService());
 provide(TYPES.alertService, () => new AlertService());
 provide(TYPES.routerService, () => new RouterService());

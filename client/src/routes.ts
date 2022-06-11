@@ -15,12 +15,12 @@ const routes: ISwitchItem[] = [
     {
         path: '/connect-page',
         element: ConnectPage,
-        prefetch: () => ioc.web3Service.prefetch(),
+        prefetch: () => ioc.ethersService.prefetch(),
         redirect: () => {
             let isOk = true;
-            isOk = isOk && ioc.web3Service.isWeb3Available;
-            isOk = isOk && ioc.web3Service.isWeb3Connected;
-            isOk = isOk && ioc.web3Service.isAccountEnabled;
+            isOk = isOk && ioc.ethersService.isMetamaskAvailable;
+            isOk = isOk && ioc.ethersService.isProviderConnected;
+            isOk = isOk && ioc.ethersService.isAccountEnabled;
             if (isOk) {
                 return '/mint-page';
             }

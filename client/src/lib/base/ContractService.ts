@@ -1,76 +1,66 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { inject, singleshot } from "react-declarative";
 
-import { Contract } from 'web3-eth-contract';
-import { AbiItem } from 'web3-utils';
-import { Unit } from 'web3-utils';
+import {
+    ethers,
+    BaseContract,
+    BigNumber,
+} from "ethers";
 
-import { toWei } from 'web3-utils';
+import EthersService from "./EthersService";
 
-import Web3Service from "./Web3Service";
+import { CC_CONTRACT_ADDRESS } from "../../config";
+import { CC_CONTRACT_ABI } from "../../config";
 
 import TYPES from "../types";
 
-import ContractAbi from "../../contracts/SendMoneyExample.json";
+interface IContract extends BaseContract {
+    maxSupply: () => Promise<BigNumber>;
+    totalSupply: () => Promise<BigNumber>;
+    maxMintAmountPerTx: () => Promise<BigNumber>;
+    cost: () => Promise<BigNumber>;
+    paused: () => Promise<boolean>;
+    whitelistMintEnabled: () => Promise<boolean>;
+}
 
 export class ContractService {
 
-    readonly web3Service = inject<Web3Service>(TYPES.web3Service);
+    readonly ethersService = inject<EthersService>(TYPES.ethersService);
 
-    private _instance: Contract = null as never;
+    private _instance: IContract = null as never;
 
     get isContractConnected() {
         return !!this._instance;
-    };
-
-    get contractAbi(): AbiItem {
-        return ContractAbi.abi as any;
     };
 
     constructor() {
         makeAutoObservable(this);
     };
 
-    getContractAddress = async (): Promise<string | null> => {
-        const networkId = await this.web3Service.eth.net.getId();
-        const deployedNetwork = (ContractAbi.networks as any)[networkId]!;
-        return deployedNetwork?.address || null;
-    };
+    maxSupply = async () => (await this._instance.maxSupply()).toNumber()
+    totalSupply = async () => (await this._instance.totalSupply()).toNumber()
+    maxMintAmountPerTx = async () =>  (await this._instance.maxMintAmountPerTx()).toNumber()
+    tokenPrice = async () =>  await this._instance.cost()
+    isPaused = async () =>  await this._instance.paused()
+    isWhitelistMintEnabled = async () => await this._instance.whitelistMintEnabled()
 
-    sendEtherValue = async (method: string, ethers: number, ...args: any) => {
-        const amountToSend = toWei(ethers.toString(), "ether");
-        const account = this.web3Service.selectedAddress;
-        await this._instance.methods[method](...args).send({
-            from: account,
-            value: amountToSend,
-        });
-    };
-
-    writeValue = async (method: string, ...args: any[]) => {
-        const account = this.web3Service.selectedAddress;
-        await this._instance.methods[method](...args).send({ from: account });
-    };
-
-    readValue = async (method: string) => {
-        const response = await this._instance.methods[method].call();
-        debugger
-    };
-
-    prefetch = async () => {
+    prefetch = singleshot(async () => {
         console.log("ContractService initContract started");
         try {
-            const address = await this.getContractAddress();
-            const instance = new this.web3Service.eth.Contract(
-                this.contractAbi,
-                address || undefined,
-            );
+            const deployedCode = await this.ethersService.getCode(CC_CONTRACT_ADDRESS);
+            if (deployedCode === '0x') {
+                throw new Error('ContractService contract not deployed');
+            }
+            const instance = new ethers.Contract(
+                CC_CONTRACT_ADDRESS,
+                CC_CONTRACT_ABI,
+                this.ethersService.getSigner(),
+            ) as IContract;
             runInAction(() => this._instance = instance);
-            return true;
         } catch (e) {
             console.warn('ContractService initContract failed', e);
-            return false;
         }
-    };
+    });
 
 };
 

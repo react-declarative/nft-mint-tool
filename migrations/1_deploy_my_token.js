@@ -1,5 +1,5 @@
 const MyToken = artifacts.require("MyToken.sol");
 
 module.exports = async (deployer) => {
-    await deployer.deploy(MyToken, 100_000);
+    await deployer.deploy(MyToken/*, 100_000*/);
 };

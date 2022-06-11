@@ -1,5 +1,5 @@
 const baseServices = {
-    web3Service: Symbol.for('web3Service'),
+    ethersService: Symbol.for('ethersService'),
     contractService: Symbol.for('contractService'),
     merkleTreeService: Symbol.for('merkleTreeService'),
     alertService: Symbol.for('alertService'),
