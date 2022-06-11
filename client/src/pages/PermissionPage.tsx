@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { makeStyles } from '@mui/styles';
-import { Stack, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -26,26 +27,32 @@ const useStyles = makeStyles<Theme>((theme) => ({
     },
 }));
 
-export const HomePage = () => {
+export const ConnectPage = () => {
     const classes = useStyles();
 
-    const generateContractUrl = () => "";
+    const handleReload = () => {
+        window.location.reload();
+    };
 
     return (
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" src="/logo.png" />
+                    <img loading='lazy' width="100%" height="113px" src="/logo.png" />
                     <span>
-                        Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
-                        You can interact with the smart-contract <strong>directly</strong> through <strong>Etherscan</strong>, without even
-                        connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
+                        It looks like you rejected the wallet connection request <span className="emoji">😐</span><br />
+                        Please reload this page and try again
                     </span>
-                    <Button variant="contained">Connect wallet</Button>
+                    <Button
+                        variant="contained"
+                        onClick={handleReload}
+                    >
+                        Reload page
+                    </Button>
                 </Stack>
             </Paper>
         </Box>
     );
 };
 
-export default HomePage;
+export default ConnectPage;

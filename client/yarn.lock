@@ -10642,10 +10642,10 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
-"react-declarative@^1.9.14":
-  "integrity" "sha512-R+K8n9+q+alwyjUVbLmGbcc9AqZczieVGzyO/1jvzpm62WjG26U/MGScfhUaFceHWQHNXg2JUUzAwKHIdz2v2A=="
-  "resolved" "https://registry.npmjs.org/react-declarative/-/react-declarative-1.9.14.tgz"
-  "version" "1.9.14"
+"react-declarative@^1.9.19":
+  "integrity" "sha512-NftfJdntQyXH2fwVE5vgsYV5q+4Qr+8Cz1IX42pYrugn4OodXPZF4wUH700QVgZMF1Vva820q3WaKkzpNYz9Nw=="
+  "resolved" "https://registry.npmjs.org/react-declarative/-/react-declarative-1.9.19.tgz"
+  "version" "1.9.19"
   dependencies:
     "@emotion/react" "^11.5.0"
     "@emotion/styled" "^11.3.0"

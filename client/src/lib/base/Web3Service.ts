@@ -27,8 +27,8 @@ export class Web3Service {
         return !!window.ethereum.selectedAddress;
     };
 
-    get currentAccount() {
-        return this._web3?.eth.defaultAccount || null;
+    get selectedAddress(): string | null {
+        return window.ethereum.selectedAddress;
     };
 
     get eth() {
@@ -43,11 +43,9 @@ export class Web3Service {
         makeAutoObservable(this);
     };
 
-    connect = async () => {
-        if (!this.isAccountEnabled) {
-            await window.ethereum.request({ method: 'eth_requestAccounts' });   
-        }
-    };
+    enable = singleshot(async () => {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });   
+    });
 
     prefetch = singleshot(async () => {
         console.log("Web3Service prefetch started");

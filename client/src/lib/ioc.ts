@@ -7,7 +7,7 @@ import Web3Service from "./base/Web3Service";
 import AlertService from "./base/AlertService";
 import RouterService from './base/RouterService';
 
-import HomePageService from './view/HomePageService';
+import ConnectPageService from './view/ConnectPageService';
 
 import "./config"
 
@@ -22,7 +22,7 @@ const baseServices = {
 };
 
 const viewServices = {
-    homePageService: inject<HomePageService>(TYPES.homePageService),
+    connectPageService: inject<ConnectPageService>(TYPES.connectPageService),
 };
 
 export const ioc = {

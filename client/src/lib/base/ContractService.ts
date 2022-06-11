@@ -49,7 +49,7 @@ export class ContractService {
         return response;
     };
 
-    initContract = async () => {
+    prefetch = async () => {
         console.log("ContractService initContract started");
         try {
             const address = await this.getContractAddress();

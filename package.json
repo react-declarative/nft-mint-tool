@@ -4,7 +4,8 @@
   "description": "",
   "main": "truffle-config.js",
   "scripts": {
-    "build": "truffle compile"
+    "build": "truffle compile",
+    "deploy": "truffle deploy"
   },
   "keywords": [],
   "author": "",

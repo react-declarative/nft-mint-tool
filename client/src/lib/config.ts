@@ -6,7 +6,7 @@ import MerkleTreeService from './base/MerkleTreeService';
 import AlertService from './base/AlertService';
 import RouterService from './base/RouterService';
 
-import HomePageService from './view/HomePageService';
+import ConnectPageService from './view/ConnectPageService';
 
 import TYPES from "./types";
 
@@ -16,4 +16,4 @@ provide(TYPES.merkleTreeService, () => new MerkleTreeService());
 provide(TYPES.alertService, () => new AlertService());
 provide(TYPES.routerService, () => new RouterService());
 
-provide(TYPES.homePageService, () => new HomePageService());
+provide(TYPES.connectPageService, () => new ConnectPageService());

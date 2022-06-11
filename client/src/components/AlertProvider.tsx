@@ -12,7 +12,7 @@ interface IAlertProviderProps {
     children: React.ReactChild;
 }
 
-export const AlertProvider = ({
+export const AlertProvider = observer(({
     children,
 }: IAlertProviderProps) => {
     const { current } = ioc.alertService;
@@ -31,6 +31,6 @@ export const AlertProvider = ({
             {children}
         </>
     );
-};
+});
 
-export default observer(AlertProvider);
+export default AlertProvider;

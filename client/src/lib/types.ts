@@ -7,7 +7,7 @@ const baseServices = {
 };
 
 const viewServices = {
-    homePageService: Symbol.for('homePageService'),
+    connectPageService: Symbol.for('connectPageService'),
 };
 
 export const TYPES = {

@@ -5,7 +5,7 @@ import { ModalProvider } from 'react-declarative';
 
 import AlertProvider from './components/AlertProvider';
 
-import App from './App';
+import App from './components/App';
 
 import THEME_DARK from './theme';
 
