@@ -3,12 +3,17 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
+import { Async } from 'react-declarative';
+
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
 import SupplyCard from '../components/common/SupplyCard';
 import WalletCard from '../components/common/WalletCard';
 import PausedCard from '../components/common/PausedCard';
+import LoadingCard from '../components/common/LoadingCard';
+
+import sleep from '../utils/sleep';
 
 import ioc from '../lib/ioc';
 
@@ -44,7 +49,12 @@ export const MintPage = () => {
                 <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
             </Paper>
             <WalletCard />
-            <PausedCard />
+            <Async Loader={LoadingCard}>
+                {async () => {
+                    await sleep(15_000);
+                    return <PausedCard />;
+                }}
+            </Async>
             <SupplyCard />
         </Box>
     );

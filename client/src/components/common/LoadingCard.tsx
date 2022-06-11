@@ -4,14 +4,9 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import classNames from 'classnames';
-
-interface IPausedCardProps {
-    style?: React.CSSProperties;
-    className?: string;
-}
 
 const useStyles = makeStyles<Theme>((theme) => ({
     root: {
@@ -29,25 +24,15 @@ const useStyles = makeStyles<Theme>((theme) => ({
     },
 }));
 
-export const PausedCard = ({
-    style,
-    className,
-}: IPausedCardProps) => {
+export const LoadingCard = () => {
 
     const classes = useStyles();
 
     return (
-        <Paper
-            className={classNames(className, classes.root)}
-            style={style}
-        >
-            <span className="emoji">⏳</span>
-            <Typography style={{ textAlign: 'center' }}>
-                The contract is <strong>paused</strong>.<br /> 
-                Please come back during the next sale!
-            </Typography>
+        <Paper className={classes.root}>
+            <CircularProgress />
         </Paper>
     );
 };
 
-export default PausedCard;
+export default LoadingCard;
