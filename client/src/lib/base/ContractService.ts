@@ -45,7 +45,7 @@ export class ContractService {
     isWhitelistMintEnabled = async () => await this._instance.whitelistMintEnabled()
 
     prefetch = singleshot(async () => {
-        console.log("ContractService initContract started");
+        console.log("ContractService prefetch started");
         try {
             const deployedCode = await this.ethersService.getCode(CC_CONTRACT_ADDRESS);
             if (deployedCode === '0x') {
@@ -58,7 +58,7 @@ export class ContractService {
             ) as IContract;
             runInAction(() => this._instance = instance);
         } catch (e) {
-            console.warn('ContractService initContract failed', e);
+            console.warn('ContractService prefetch failed', e);
         }
     });
 

@@ -23,8 +23,8 @@ const useStyles = makeStyles<Theme>((theme) => ({
     },
     container: {
         flex: 1,
-        minWidth: 450,
-        maxWidth: 450,
+        minWidth: 375,
+        maxWidth: 375,
         padding: 15,
     },
 }));
@@ -35,7 +35,7 @@ export const ConnectPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" height="113px" src="/logo.png" />
+                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
                     <span>
                         Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
                         You can interact with the smart-contract <strong>directly</strong> through <strong>Etherscan</strong>, without even

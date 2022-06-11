@@ -4,6 +4,7 @@ const baseServices = {
     merkleTreeService: Symbol.for('merkleTreeService'),
     alertService: Symbol.for('alertService'),
     routerService: Symbol.for('routerService'),
+    assetService: Symbol.for('assetService'),
 };
 
 const viewServices = {

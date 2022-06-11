@@ -5,6 +5,7 @@ import MerkleTreeService from "./base/MerkleTreeService";
 import EthersService from "./base/EthersService";
 import AlertService from "./base/AlertService";
 import RouterService from './base/RouterService';
+import AssetService from './base/AssetService';
 
 import ConnectPageService from './view/ConnectPageService';
 import MintPageService from './view/MintPageService';
@@ -19,6 +20,7 @@ const baseServices = {
     ethersService: inject<EthersService>(TYPES.ethersService),
     alertService: inject<AlertService>(TYPES.alertService),
     routerService: inject<RouterService>(TYPES.routerService),
+    assetService: inject<AssetService>(TYPES.assetService),
 };
 
 const viewServices = {

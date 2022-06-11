@@ -53,15 +53,15 @@ export class EthersService {
     };
 
     prefetch = singleshot(async () => {
-        console.log("Web3Service prefetch started");
+        console.log("EthersService prefetch started");
         try {
             if (window.ethereum) {
-                console.log("Web3Service prefetch eip-1102 detected");
+                console.log("EthersService prefetch eip-1102 detected");
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 runInAction(() => this._provider = provider);
             }
         } catch (e) {
-            console.warn('Web3Service prefetch failed', e);
+            console.warn('EthersService prefetch failed', e);
         }
     });
 

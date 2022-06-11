@@ -11,6 +11,7 @@ import ioc from "./lib/ioc";
 const routes: ISwitchItem[] = [
     {
         path: '/',
+        prefetch: () => ioc.assetService.prefetch(),
         redirect: '/connect-page',
     },
     {

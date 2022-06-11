@@ -8,6 +8,8 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
+import ioc from '../lib/ioc';
+
 const useStyles = makeStyles<Theme>((theme) => ({
     root: {
         position: 'relative',
@@ -21,8 +23,8 @@ const useStyles = makeStyles<Theme>((theme) => ({
     },
     container: {
         flex: 1,
-        minWidth: 450,
-        maxWidth: 450,
+        minWidth: 375,
+        maxWidth: 375,
         padding: 15,
     },
 }));
@@ -38,7 +40,7 @@ export const MintPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" height="113px" src="/logo.png" />
+                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
                     <span>
                         This one is a mint page
                     </span>

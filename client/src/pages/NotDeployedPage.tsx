@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
-const useStyles = makeStyles<Theme>((theme) => ({
+import ioc from '../lib/ioc';
+
+const useStyles = makeStyles({
     root: {
         position: 'relative',
         height: '100%',
@@ -21,11 +22,11 @@ const useStyles = makeStyles<Theme>((theme) => ({
     },
     container: {
         flex: 1,
-        minWidth: 450,
-        maxWidth: 450,
+        minWidth: 375,
+        maxWidth: 375,
         padding: 15,
     },
-}));
+});
 
 export const ConnectPage = () => {
     const classes = useStyles();
@@ -38,7 +39,7 @@ export const ConnectPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" height="113px" src="/logo.png" />
+                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')}  />
                     <span>
                         Could not find the contract, are you connected to the right chain?<span className="emoji">😐</span><br />
                         Please reload this page and try again
