@@ -4,6 +4,7 @@ import ConnectPage from "./pages/ConnectPage";
 import PermissionPage from "./pages/PermissionPage";
 import NoMetamaskPage from "./pages/NoMetamaskPage";
 import NotDeployedPage from "./pages/NotDeployedPage";
+import ErrorPage from "./pages/ErrorPage";
 import MintPage from "./pages/MintPage";
 
 import ioc from "./lib/ioc";
@@ -51,6 +52,10 @@ const routes: ISwitchItem[] = [
     {
         path: '/notdeployed-page',
         element: NotDeployedPage,
+    },
+    {
+        path: '/error-page',
+        element: ErrorPage,
     },
 ];
 
