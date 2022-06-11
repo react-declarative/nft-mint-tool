@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 import { makeStyles } from '@mui/styles';
-import { Theme, alpha } from '@mui/material';
+import { Theme, alpha, lighten } from '@mui/material';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -22,7 +22,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
         right: 0,
         left: 0,
         height: FOOTER_HEIGHT,
-        background: alpha(theme.palette.background.default, 0.8),
+        background: alpha(lighten(theme.palette.background.default, 0.05), 0.8),
         backdropFilter: 'saturate(180%) blur(20px)',
         [theme.breakpoints.down('md')]: {
             display: 'none',
