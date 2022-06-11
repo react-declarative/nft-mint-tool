@@ -1,5 +1,3 @@
-import process from "process";
-
 import { inject } from 'react-declarative';
 
 import ContractService from "./base/ContractService";
@@ -33,8 +31,8 @@ export const ioc = {
     ...viewServices,
 };
 
-// if (process.env.NODE_ENV === 'development') {
+if (process.env.REACT_APP_STAGE === 'dev') {
     (window as any).ioc = ioc;
-// }
+}
 
 export default ioc;

@@ -3,6 +3,7 @@ import { ISwitchItem } from "react-declarative";
 import ConnectPage from "./pages/ConnectPage";
 import PermissionPage from "./pages/PermissionPage";
 import NoMetamaskPage from "./pages/NoMetamaskPage";
+import NotDeployedPage from "./pages/NotDeployedPage";
 import MintPage from "./pages/MintPage";
 
 import ioc from "./lib/ioc";
@@ -29,8 +30,14 @@ const routes: ISwitchItem[] = [
     },
     {
         path: '/mint-page',
-        prefetch: () => ioc.contractService.prefetch(),
         element: MintPage,
+        prefetch: () => ioc.contractService.prefetch(),
+        redirect: () => {
+            if (!ioc.contractService.isContractConnected) {
+                return '/notdeployed-page';
+            }
+            return null;
+        },
     },
     {
         path: '/permission-page',
@@ -39,6 +46,10 @@ const routes: ISwitchItem[] = [
     {
         path: '/nometamask-page',
         element: NoMetamaskPage,
+    },
+    {
+        path: '/notdeployed-page',
+        element: NotDeployedPage,
     },
 ];
 
