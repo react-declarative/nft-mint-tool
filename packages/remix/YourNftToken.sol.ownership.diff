@@ -1,0 +1,18 @@
+diff --git a/packages/remix/YourNftToken.sol b/packages/remix/YourNftToken.sol
+index 7f14eec..7f584e3 100644
+--- a/packages/remix/YourNftToken.sol
++++ b/packages/remix/YourNftToken.sol
+@@ -29,6 +29,15 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
+   bool public whitelistMintEnabled = false;
+   bool public revealed = false;
+ 
++  function renounceOwnership() public override onlyOwner view {
++    revert();
++  }
++
++  function transferOwnership(address newOwner) public override onlyOwner view {
++    require(newOwner != address(0));
++    revert();
++  }
++
+   constructor(

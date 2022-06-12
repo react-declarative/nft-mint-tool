@@ -26,7 +26,7 @@ index 880131a..7f14eec 100644
      setCost(_cost);
 -    maxSupply = _maxSupply;
 +    setMintWave(1);
-+    setMaxSupply(_maxSupply)
++    setMaxSupply(_maxSupply);
      setMaxMintAmountPerTx(_maxMintAmountPerTx);
      setHiddenMetadataUri(_hiddenMetadataUri);
    }
