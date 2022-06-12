@@ -12,6 +12,7 @@ import SupplyCard from '../components/common/SupplyCard';
 import WalletCard from '../components/common/WalletCard';
 import PausedCard from '../components/common/PausedCard';
 import LoadingCard from '../components/common/LoadingCard';
+import MintCard from '../components/common/MintCard';
 
 import sleep from '../utils/sleep';
 
@@ -49,12 +50,13 @@ export const MintPage = () => {
                 <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
             </Paper>
             <WalletCard />
-            <Async Loader={LoadingCard}>
+            {/*<Async Loader={LoadingCard}>
                 {async () => {
                     await sleep(15_000);
                     return <PausedCard />;
                 }}
-            </Async>
+            </Async>*/}
+            <MintCard />
             <SupplyCard />
         </Box>
     );

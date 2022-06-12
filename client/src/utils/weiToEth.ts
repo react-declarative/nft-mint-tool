@@ -5,7 +5,7 @@ import { BigNumber } from 'ethers';
 
 export const weiToEth = (wei: BigNumber | number) => {
     const value = fromWei(wei.toString(), 'ether');
-    return roundTicks(Number(value), 8);
+    return roundTicks(Number(value), 6);
 };
 
 export default weiToEth;

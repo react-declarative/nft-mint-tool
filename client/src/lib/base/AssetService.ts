@@ -36,7 +36,10 @@ export class AssetService {
     prefetch = singleshot(async () => {
         console.log("AssetService prefetch started");
         try {
-            await this.downloadImage('/logo.png');
+            await Promise.all([
+                this.downloadImage('/logo.png'),
+                this.downloadImage('/preview.png'),
+            ]);
         } catch (e) {
             console.warn('AssetService prefetch failed', e);
         }
