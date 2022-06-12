@@ -13,7 +13,7 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   using Strings for uint256;
 
   bytes32 public merkleRoot;
-  mapping(address => bool) public whitelistClaimed;
+  mapping(address => uint256) public whitelistClaimed;
 
   string public uriPrefix = '';
   string public uriSuffix = '.json';
@@ -22,6 +22,8 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   uint256 public cost;
   uint256 public maxSupply;
   uint256 public maxMintAmountPerTx;
+
+  uint256 public mintWave;
 
   bool public paused = true;
   bool public whitelistMintEnabled = false;
@@ -36,7 +38,8 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
     string memory _hiddenMetadataUri
   ) ERC721A(_tokenName, _tokenSymbol) {
     setCost(_cost);
-    maxSupply = _maxSupply;
+    setMintWave(1);
+    setMaxSupply(_maxSupply)
     setMaxMintAmountPerTx(_maxMintAmountPerTx);
     setHiddenMetadataUri(_hiddenMetadataUri);
   }
@@ -55,11 +58,11 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   function whitelistMint(uint256 _mintAmount, bytes32[] calldata _merkleProof) public payable mintCompliance(_mintAmount) mintPriceCompliance(_mintAmount) {
     // Verify whitelist requirements
     require(whitelistMintEnabled, 'The whitelist sale is not enabled!');
-    require(!whitelistClaimed[_msgSender()], 'Address already claimed!');
+    require(whitelistClaimed[_msgSender()] != mintWave, 'Address already claimed!');
     bytes32 leaf = keccak256(abi.encodePacked(_msgSender()));
     require(MerkleProof.verify(_merkleProof, merkleRoot, leaf), 'Invalid proof!');
 
-    whitelistClaimed[_msgSender()] = true;
+    whitelistClaimed[_msgSender()] = mintWave;
     _safeMint(_msgSender(), _mintAmount);
   }
 
@@ -126,8 +129,16 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
     cost = _cost;
   }
 
+  function setMintWave(uint256 _mintWave) public onlyOwner {
+    mintWave = _mintWave;
+  }
+
   function setMaxMintAmountPerTx(uint256 _maxMintAmountPerTx) public onlyOwner {
     maxMintAmountPerTx = _maxMintAmountPerTx;
+  }
+
+  function setMaxSupply(uint256 _maxSupply) public onlyOwner {
+    maxSupply = _maxSupply;
   }
 
   function setHiddenMetadataUri(string memory _hiddenMetadataUri) public onlyOwner {
