@@ -21,6 +21,11 @@ import weiToEth from '../../utils/weiToEth';
 
 import ioc from '../../lib/ioc';
 
+const MAX_AMOUNT_DIGITS = 5;
+
+const MAX_AMOUNT = 10 ** MAX_AMOUNT_DIGITS - 1;
+const MAX_AMOUNT_TMPL = MAX_AMOUNT.toString().split('').fill('0').join('');
+
 const useStyles = makeStyles({
     root: {
         position: 'relative',
@@ -102,7 +107,7 @@ const fields: TypedField[] = [
                         defaultValue: '1',
                         fieldRightMargin: '0',
                         fieldBottomMargin: '0',
-                        inputFormatterTemplate: '000000',
+                        inputFormatterTemplate: MAX_AMOUNT_TMPL,
                         inputFormatterAllowed: /([0-9])/g,
                     },
                     {
@@ -122,7 +127,7 @@ const fields: TypedField[] = [
                                 <IconButton
                                     size="small"
                                     onClick={() => onChange({
-                                        quantity: (parseInt(quantity) + 1).toString(),
+                                        quantity: Math.min(parseInt(quantity) + 1, MAX_AMOUNT).toString(),
                                     })}
                                 >
                                     <PlusIcon />
@@ -138,8 +143,8 @@ const fields: TypedField[] = [
                     quantity: Q,
                     cost: C,
                 }) => {
-                    const quantity = parseInt(Q);
-                    const cost = parseInt(C);
+                    const quantity = parseInt(Q || 0);
+                    const cost = parseInt(C || 0);
                     const eths = weiToEth(quantity * cost);
                     return (
                         <Box

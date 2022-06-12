@@ -22,6 +22,15 @@ export class MintPageService {
     handleMintTokensClick = async (quantity: number, cost: number): Promise<undefined | true> => {
         this.layoutService.setLoader(true);
         try {
+            if (quantity <= 0) {
+                this.alertService.notify('Quantity must be greater than zero');
+                return;
+            }
+            const maxAmountPerTx = await this.contractService.maxMintAmountPerTx();
+            if (quantity >= maxAmountPerTx) {
+                this.alertService.notify(`Quantity must be lower than ${maxAmountPerTx}`);
+                return;
+            }
             const isWhiteListEnabled = await this.contractService.isWhitelistMintEnabled();
             if (isWhiteListEnabled) {
                 await this.contractService.whitelistMintTokens(quantity, quantity * cost);
