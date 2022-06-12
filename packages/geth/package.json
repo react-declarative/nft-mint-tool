@@ -1,0 +1,8 @@
+{
+  "name": "enviroment",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "sh ./scripts/run.sh",
+    "attach": "sh ./scripts/attach.sh"
+  }
+}
