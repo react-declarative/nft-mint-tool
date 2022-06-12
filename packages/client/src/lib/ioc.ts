@@ -6,6 +6,7 @@ import EthersService from "./base/EthersService";
 import AlertService from "./base/AlertService";
 import RouterService from './base/RouterService';
 import AssetService from './base/AssetService';
+import LayoutService from './base/LayoutService';
 
 import ConnectPageService from './view/ConnectPageService';
 import MintPageService from './view/MintPageService';
@@ -21,6 +22,7 @@ const baseServices = {
     alertService: inject<AlertService>(TYPES.alertService),
     routerService: inject<RouterService>(TYPES.routerService),
     assetService: inject<AssetService>(TYPES.assetService),
+    layoutService: inject<LayoutService>(TYPES.layoutService),
 };
 
 const viewServices = {

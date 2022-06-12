@@ -6,6 +6,7 @@ import NoMetamaskPage from "./pages/NoMetamaskPage";
 import NotDeployedPage from "./pages/NotDeployedPage";
 import ErrorPage from "./pages/ErrorPage";
 import MintPage from "./pages/MintPage";
+import AfterMintPage from "./pages/AfterMintPage";
 
 import ioc from "./lib/ioc";
 
@@ -40,6 +41,10 @@ const routes: ISwitchItem[] = [
             }
             return null;
         },
+    },
+    {
+        path: '/aftermint-page',
+        element: AfterMintPage,
     },
     {
         path: '/permission-page',

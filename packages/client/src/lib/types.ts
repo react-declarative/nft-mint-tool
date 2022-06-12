@@ -5,6 +5,7 @@ const baseServices = {
     alertService: Symbol.for('alertService'),
     routerService: Symbol.for('routerService'),
     assetService: Symbol.for('assetService'),
+    layoutService: Symbol.for('layoutService'),
 };
 
 const viewServices = {

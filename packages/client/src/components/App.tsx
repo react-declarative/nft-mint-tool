@@ -1,13 +1,17 @@
 import React from 'react';
 import { useState } from "react";
+import { observer } from 'mobx-react';
 
 import { makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
 
 import { Switch } from 'react-declarative';
 
 import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Footer from './common/Footer';
 
@@ -23,7 +27,7 @@ const useStyles = makeStyles({
 
 const Fragment = () => <></>;
 
-const App = () => {
+const App = observer(() => {
 
   const classes = useStyles();
 
@@ -39,6 +43,14 @@ const App = () => {
           <LinearProgress color="secondary" />
         </Box>
       )}
+      {ioc.layoutService.hasLoader && (
+        <Backdrop
+          sx={{ zIndex: (theme: Theme) => theme.zIndex.drawer + 1 }}
+          open={ioc.layoutService.hasLoader}
+        >
+          <CircularProgress />
+        </Backdrop>
+      )}
       <CssBaseline />
       <Switch
         Loader={Fragment}
@@ -50,6 +62,6 @@ const App = () => {
       <Footer />
     </Box>
   );
-};
+});
 
 export default App;

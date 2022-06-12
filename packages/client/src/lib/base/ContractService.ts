@@ -22,6 +22,8 @@ interface IContract extends BaseContract {
     name: () => Promise<string>;
     symbol: () => Promise<string>;
     cost: () => Promise<BigNumber>;
+    mintWave: () => Promise<BigNumber>;
+    whitelistClaimed: (address: string) => Promise<BigNumber>;
     paused: () => Promise<boolean>;
     whitelistMintEnabled: () => Promise<boolean>;
     mint: (amount: number, params: Record<string, any>) => Promise<void>;  
@@ -46,9 +48,11 @@ export class ContractService {
     name = async () => await this._instance.name();
     symbol = async () => await this._instance.symbol();
 
+    mintWave = async () => (await this._instance.mintWave()).toNumber()
     maxSupply = async () => (await this._instance.maxSupply()).toNumber()
     totalSupply = async () => (await this._instance.totalSupply()).toNumber()
     maxMintAmountPerTx = async () =>  (await this._instance.maxMintAmountPerTx()).toNumber()
+    whitelistClaimed = async (address: string) =>  (await this._instance.whitelistClaimed(address)).toNumber()
     tokenPrice = async () =>  (await this._instance.cost()).toNumber()
     isPaused = async () =>  await this._instance.paused()
     isWhitelistMintEnabled = async () => await this._instance.whitelistMintEnabled()

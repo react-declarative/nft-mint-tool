@@ -89,7 +89,15 @@ export const SupplyCard = ({
                 </Async>
             </Typography>
             <Typography className={classes.bold}>
-                Token Price
+                Mint Wave
+            </Typography>
+            <Typography>
+                <Async Loader={Loader} throwError>
+                    {async () => `№ ${await ioc.contractService.mintWave()}`}
+                </Async>
+            </Typography>
+            <Typography className={classes.bold}>
+                Wave Price
             </Typography>
             <Typography>
                 <Async Loader={Loader} throwError>

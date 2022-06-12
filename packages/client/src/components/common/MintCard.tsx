@@ -135,10 +135,12 @@ const fields: TypedField[] = [
             {
                 type: FieldType.Component,
                 element: ({
-                    quantity,
-                    cost,
+                    quantity: Q,
+                    cost: C,
                 }) => {
-                    const eths = weiToEth(parseInt(quantity) * parseInt(cost));
+                    const quantity = parseInt(Q);
+                    const cost = parseInt(C);
+                    const eths = weiToEth(quantity * cost);
                     return (
                         <Box
                             sx={{
@@ -157,7 +159,10 @@ const fields: TypedField[] = [
                                 <strong>Total price:</strong>
                                 {`${eths} ETH`}
                             </Typography>
-                            <Button variant="contained">
+                            <Button
+                                variant="contained"
+                                onClick={() => ioc.mintPageService.handleMintTokensClick(quantity, cost)}
+                            >
                                 Mint
                             </Button>
                         </Box>

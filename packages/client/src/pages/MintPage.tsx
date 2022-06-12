@@ -12,6 +12,7 @@ import SupplyCard from '../components/common/SupplyCard';
 import WalletCard from '../components/common/WalletCard';
 import PausedCard from '../components/common/PausedCard';
 import NotWhitelistedCard from '../components/common/NotWhitelistedCard';
+import WhitelistMintedCard from '../components/common/WhitelistMintedCard';
 import LoadingCard from '../components/common/LoadingCard';
 import MintCard from '../components/common/MintCard';
 
@@ -61,7 +62,13 @@ export const MintPage = () => {
                         return <MintCard />;
                     } else if (isWhiteListEnabled) {
                         if (merkleProof.length) {
-                            return <MintCard />;
+                            const mintWave = await ioc.contractService.mintWave();
+                            const claimed = await ioc.contractService.whitelistClaimed(address!);
+                            if (mintWave === claimed) {
+                                return <WhitelistMintedCard />;
+                            } else {
+                                return <MintCard />;
+                            }
                         } else {
                             return <NotWhitelistedCard />;
                         }
