@@ -29,6 +29,15 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   bool public whitelistMintEnabled = false;
   bool public revealed = false;
 
+  function renounceOwnership() public override onlyOwner view {
+    revert();
+  }
+
+  function transferOwnership(address newOwner) public override onlyOwner view {
+    require(newOwner != address(0));
+    revert();
+  }
+
   constructor(
     string memory _tokenName,
     string memory _tokenSymbol,
@@ -39,7 +48,7 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   ) ERC721A(_tokenName, _tokenSymbol) {
     setCost(_cost);
     setMintWave(1);
-    setMaxSupply(_maxSupply)
+    setMaxSupply(_maxSupply);
     setMaxMintAmountPerTx(_maxMintAmountPerTx);
     setHiddenMetadataUri(_hiddenMetadataUri);
   }
