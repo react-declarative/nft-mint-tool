@@ -9,6 +9,8 @@ import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
+import WhitelistProofCard from '../components/common/WhitelistProofCard';
+
 import { CC_ETHERSCAN_URL } from '../config';
 
 import ioc from '../lib/ioc';
@@ -22,6 +24,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        gap: 15,
         padding: 15,
     },
     container: {
@@ -52,6 +55,7 @@ export const ConnectPage = () => {
                     </Button>
                 </Stack>
             </Paper>
+            <WhitelistProofCard />
         </Box>
     );
 };
