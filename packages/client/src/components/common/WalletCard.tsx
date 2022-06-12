@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Async } from 'react-declarative';
 
@@ -91,8 +91,8 @@ export const WalletCard = ({
                         textOverflow: 'ellipsis'
                     }}
                 >
-                    <Async Loader={Loader}>
-                        {() => ioc.ethersService.getAccount()}
+                    <Async Loader={Loader} throwError>
+                        {async () => await ioc.ethersService.getAccount()}
                     </Async>
                 </Typography>
             </Box>
@@ -101,10 +101,11 @@ export const WalletCard = ({
                     Supply
                 </Typography>
                 <Typography>
-                    <Async Loader={Loader}>
+                    <Async Loader={Loader} throwError>
                         {async () => {
-                            await sleep(50_000);
-                            return '0';
+                            const totalSupply = await ioc.contractService.totalSupply();
+                            const maxSupply = await ioc.contractService.maxSupply();
+                            return `${totalSupply}/${maxSupply}`
                         }}
                     </Async>
                 </Typography>
@@ -114,10 +115,17 @@ export const WalletCard = ({
                     Sale status
                 </Typography>
                 <Typography>
-                    <Async Loader={Loader}>
+                    <Async Loader={Loader} throwError>
                         {async () => {
-                            await sleep(25_000);
-                            return '0';
+                            const isPaused = await ioc.contractService.isPaused();
+                            const isWhiteListEnabled = await ioc.contractService.isWhitelistMintEnabled();
+                            if (isWhiteListEnabled) {
+                                return 'Whitelist';
+                            } else if (!isPaused) {
+                                return 'Running';
+                            } else {
+                                return 'Paused';
+                            }
                         }}
                     </Async>
                 </Typography>

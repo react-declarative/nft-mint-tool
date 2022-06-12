@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import SupplyCard from '../components/common/SupplyCard';
 import WalletCard from '../components/common/WalletCard';
 import PausedCard from '../components/common/PausedCard';
+import NotWhitelistedCard from '../components/common/NotWhitelistedCard';
 import LoadingCard from '../components/common/LoadingCard';
 import MintCard from '../components/common/MintCard';
 
@@ -50,13 +51,25 @@ export const MintPage = () => {
                 <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
             </Paper>
             <WalletCard />
-            {/*<Async Loader={LoadingCard}>
+            <Async Loader={LoadingCard} throwError>
                 {async () => {
-                    await sleep(15_000);
-                    return <PausedCard />;
+                    const address = await ioc.ethersService.getAccount();
+                    const isPaused = await ioc.contractService.isPaused();
+                    const isWhiteListEnabled = await ioc.contractService.isWhitelistMintEnabled();
+                    const merkleProof = ioc.merkleTreeService.getRawProofForAddress(address!);
+                    if (!isPaused) {
+                        return <MintCard />;
+                    } else if (isWhiteListEnabled) {
+                        if (merkleProof.length) {
+                            return <MintCard />;
+                        } else {
+                            return <NotWhitelistedCard />;
+                        }
+                    } else {
+                        return <PausedCard />;
+                    }
                 }}
-            </Async>*/}
-            <MintCard />
+            </Async>
             <SupplyCard />
         </Box>
     );

@@ -31,7 +31,7 @@ export class MerkleTreeService {
 
   public getRoot() {
     return this.getMerkleTree().getHexRoot();
-  }
+  };
 
   public contains(address: string): boolean {
     return this.getMerkleTree().getLeafIndex(Buffer.from(keccak256(address))) >= 0;

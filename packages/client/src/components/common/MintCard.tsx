@@ -150,6 +150,7 @@ const fields: TypedField[] = [
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
+                                    marginLeft: '5px',
                                     gap: '5px',
                                 }}
                             >
@@ -173,11 +174,9 @@ export const MintCard = () => {
 
     const [backdrop, setBackdrop] = useState(true);
 
-    const handler = useStaticHandler(() => {
-        return {
-            cost: 1_000_000_000_000_000_000,
-        };
-    }, {
+    const handler = useStaticHandler(async () => ({
+        cost: await ioc.contractService.tokenPrice(),
+    }), {
         onLoadBegin: () => setBackdrop(true),
         onLoadEnd: () => setBackdrop(false),
     })

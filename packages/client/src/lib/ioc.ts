@@ -37,9 +37,9 @@ window.addEventListener('unhandledrejection', () => {
     ioc.routerService.push('/error-page');
 });
 
-window.addEventListener('error', () => {
+/*window.addEventListener('error', () => {
     ioc.routerService.push('/error-page');
-});
+});*/
 
 if (process.env.REACT_APP_STAGE === 'dev') {
     (window as any).ioc = ioc;

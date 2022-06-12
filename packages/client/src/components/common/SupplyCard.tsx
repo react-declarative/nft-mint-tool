@@ -10,9 +10,11 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import sleep from '../../utils/sleep';
-
 import classNames from 'classnames';
+
+import weiToEth from '../../utils/weiToEth';
+
+import ioc from '../../lib/ioc';
 
 interface ISupplyCardProps {
     style?: React.CSSProperties;
@@ -71,36 +73,35 @@ export const SupplyCard = ({
             style={style}
         >
             <Typography className={classes.bold}>
-                Total Supply
+                Token Name
             </Typography>
             <Typography>
-                <Async Loader={Loader}>
-                    {async () => {
-                        await sleep(50_000);
-                        return '0';
-                    }}
+                <Async Loader={Loader} throwError>
+                    {async () => await ioc.contractService.name()}
                 </Async>
             </Typography>
             <Typography className={classes.bold}>
-                Max Supply
+                Token Symbol
             </Typography>
             <Typography>
-                <Async Loader={Loader}>
-                {async () => {
-                        await sleep();
-                        return '0';
-                    }}
+                <Async Loader={Loader} throwError>
+                    {async () => await ioc.contractService.symbol()}
+                </Async>
+            </Typography>
+            <Typography className={classes.bold}>
+                Token Price
+            </Typography>
+            <Typography>
+                <Async Loader={Loader} throwError>
+                    {async () => `${weiToEth(await ioc.contractService.tokenPrice())} ETH`}
                 </Async>
             </Typography>
             <Typography className={classNames(classes.noBorder, classes.bold)}>
-                Token price
+                Max Amount per TX
             </Typography>
             <Typography className={classes.noBorder}>
-                <Async Loader={Loader}>
-                {async () => {
-                        await sleep();
-                        return '0';
-                    }}
+                <Async Loader={Loader} throwError>
+                    {async () => await ioc.contractService.maxMintAmountPerTx()}
                 </Async>
             </Typography>
         </Paper>
