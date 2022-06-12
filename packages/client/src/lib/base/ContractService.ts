@@ -45,17 +45,16 @@ export class ContractService {
         makeAutoObservable(this);
     };
 
-    name = async () => await this._instance.name();
-    symbol = async () => await this._instance.symbol();
-
-    mintWave = async () => (await this._instance.mintWave()).toNumber()
-    maxSupply = async () => (await this._instance.maxSupply()).toNumber()
-    totalSupply = async () => (await this._instance.totalSupply()).toNumber()
-    maxMintAmountPerTx = async () =>  (await this._instance.maxMintAmountPerTx()).toNumber()
-    whitelistClaimed = async (address: string) =>  (await this._instance.whitelistClaimed(address)).toNumber()
-    tokenPrice = async () =>  (await this._instance.cost()).toNumber()
-    isPaused = async () =>  await this._instance.paused()
-    isWhitelistMintEnabled = async () => await this._instance.whitelistMintEnabled()
+    name = singleshot(async () => await this._instance.name());
+    symbol = singleshot(async () => await this._instance.symbol());
+    mintWave = singleshot(async () => (await this._instance.mintWave()).toNumber());
+    maxSupply = singleshot(async () => (await this._instance.maxSupply()).toNumber());
+    totalSupply = singleshot(async () => (await this._instance.totalSupply()).toNumber());
+    maxMintAmountPerTx = singleshot(async () =>  (await this._instance.maxMintAmountPerTx()).toNumber());
+    whitelistClaimed = singleshot(async (address: string) =>  (await this._instance.whitelistClaimed(address)).toNumber());
+    tokenPrice = singleshot(async () =>  (await this._instance.cost()).toNumber());
+    isPaused = singleshot(async () =>  await this._instance.paused());
+    isWhitelistMintEnabled = singleshot(async () => await this._instance.whitelistMintEnabled());
 
     mintTokens = async (amount: number, value: number) => {
         return await this._instance.mint(amount, { value });
