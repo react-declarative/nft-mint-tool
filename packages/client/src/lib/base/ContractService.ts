@@ -26,8 +26,8 @@ interface IContract extends BaseContract {
     whitelistClaimed: (address: string) => Promise<BigNumber>;
     paused: () => Promise<boolean>;
     whitelistMintEnabled: () => Promise<boolean>;
-    mint: (amount: number, params: Record<string, any>) => Promise<void>;  
-    whitelistMint: (amount: number, proof: string[], params: Record<string, any>) => Promise<void>; 
+    mint: (amount: string, params: Record<string, any>) => Promise<void>;  
+    whitelistMint: (amount: string, proof: string[], params: Record<string, any>) => Promise<void>; 
 }
 
 export class ContractService {
@@ -57,14 +57,16 @@ export class ContractService {
     isWhitelistMintEnabled = singleshot(async () => await this._instance.whitelistMintEnabled());
 
     mintTokens = async (amount: number, value: number) => {
-        return await this._instance.mint(amount, { value });
+        return await this._instance.mint(amount.toString(), {
+            value: value.toString(),
+        });
     };
   
     whitelistMintTokens = async (amount: number, value: number) => {
         const address = await this.ethersService.getAccount();
         const proof = this.merkleTreeService.getProofForAddress(address!);
-        return await this._instance.whitelistMint(amount, proof, {
-            value,
+        return await this._instance.whitelistMint(amount.toString(), proof, {
+            value: value.toString(),
         });
     };
 
