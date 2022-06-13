@@ -47,12 +47,12 @@ export class ContractService {
 
     name = singleshot(async () => await this._instance.name());
     symbol = singleshot(async () => await this._instance.symbol());
-    mintWave = singleshot(async () => (await this._instance.mintWave()).toNumber());
-    maxSupply = singleshot(async () => (await this._instance.maxSupply()).toNumber());
-    totalSupply = singleshot(async () => (await this._instance.totalSupply()).toNumber());
-    maxMintAmountPerTx = singleshot(async () =>  (await this._instance.maxMintAmountPerTx()).toNumber());
-    whitelistClaimed = singleshot(async (address: string) =>  (await this._instance.whitelistClaimed(address)).toNumber());
-    tokenPrice = singleshot(async () =>  (await this._instance.cost()).toNumber());
+    mintWave = singleshot(async () => Number((await this._instance.mintWave()).toString()));
+    maxSupply = singleshot(async () => Number((await this._instance.maxSupply()).toString()));
+    totalSupply = singleshot(async () => Number((await this._instance.totalSupply()).toString()));
+    maxMintAmountPerTx = singleshot(async () =>  Number((await this._instance.maxMintAmountPerTx()).toString()));
+    whitelistClaimed = singleshot(async (address: string) =>  Number((await this._instance.whitelistClaimed(address)).toString()));
+    tokenPrice = singleshot(async () =>  Number((await this._instance.cost()).toString()));
     isPaused = singleshot(async () =>  await this._instance.paused());
     isWhitelistMintEnabled = singleshot(async () => await this._instance.whitelistMintEnabled());
 

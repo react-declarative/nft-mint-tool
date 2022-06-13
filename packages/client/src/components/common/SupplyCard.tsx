@@ -101,7 +101,10 @@ export const SupplyCard = ({
             </Typography>
             <Typography>
                 <Async Loader={Loader} throwError>
-                    {async () => `${weiToEth(await ioc.contractService.tokenPrice())} ETH`}
+                    {async () => {
+                        const tokenPrice = await ioc.contractService.tokenPrice();
+                        return `${weiToEth(tokenPrice)} ETH`;
+                    }}
                 </Async>
             </Typography>
             <Typography className={classNames(classes.noBorder, classes.bold)}>
