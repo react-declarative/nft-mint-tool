@@ -28,25 +28,18 @@ const useStyles = makeStyles({
 const Fragment = () => <></>;
 
 const App = observer(() => {
-
   const classes = useStyles();
-
-  const [loader, setLoader] = useState(false);
-
-  const handleLoadStart = () => setLoader(true);
-  const handleLoadEnd = () => setLoader(false);
-
   return (
     <Box>
-      {loader && (
+      {ioc.layoutService.hasAppbarLoader && (
         <Box className={classes.loaderBar}>
           <LinearProgress color="secondary" />
         </Box>
       )}
-      {ioc.layoutService.hasLoader && (
+      {ioc.layoutService.hasModalLoader && (
         <Backdrop
           sx={{ zIndex: (theme: Theme) => theme.zIndex.drawer + 1 }}
-          open={ioc.layoutService.hasLoader}
+          open={ioc.layoutService.hasModalLoader}
         >
           <CircularProgress />
         </Backdrop>
@@ -56,8 +49,9 @@ const App = observer(() => {
         Loader={Fragment}
         history={ioc.routerService}
         items={routes}
-        onLoadStart={handleLoadStart}
-        onLoadEnd={handleLoadEnd}
+        onLoadStart={() => ioc.layoutService.setAppbarLoader(true)}
+        onLoadEnd={() => ioc.layoutService.setAppbarLoader(false)}
+        throwError
       />
       <Footer />
     </Box>

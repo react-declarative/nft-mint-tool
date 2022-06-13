@@ -20,7 +20,7 @@ export class MintPageService {
     };
 
     handleMintTokensClick = async (quantity: number, cost: number): Promise<undefined | true> => {
-        this.layoutService.setLoader(true);
+        this.layoutService.setModalLoader(true);
         try {
             if (quantity <= 0) {
                 this.alertService.notify('Quantity must be greater than zero');
@@ -44,7 +44,7 @@ export class MintPageService {
             this.alertService.notify(message);
             console.warn('It looks like token mint failed with exception', e);
         } finally {
-            this.layoutService.setLoader(false);
+            this.layoutService.setModalLoader(false);
         }
     };
 

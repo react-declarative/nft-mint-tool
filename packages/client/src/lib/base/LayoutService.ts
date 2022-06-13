@@ -2,18 +2,27 @@ import { makeAutoObservable } from 'mobx';
 
 export class LayoutService {
 
-    private _loading = 0;
+    private _modalLoading = 0;
+    private _appbarLoading = 0;
 
-    get hasLoader() {
-        return !!this._loading;
+    get hasModalLoader() {
+        return !!this._modalLoading;
+    };
+
+    get hasAppbarLoader() {
+        return !!this._appbarLoading;
     };
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setLoader = (loading: boolean) => {
-        this._loading = Math.max(this._loading + (loading ? 1 : -1), 0);
+    setModalLoader = (loading: boolean) => {
+        this._modalLoading = Math.max(this._modalLoading + (loading ? 1 : -1), 0);
+    };
+
+    setAppbarLoader = (loading: boolean) => {
+        this._appbarLoading = Math.max(this._appbarLoading + (loading ? 1 : -1), 0);
     };
 
 }

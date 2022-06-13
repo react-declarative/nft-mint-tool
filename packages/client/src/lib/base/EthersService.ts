@@ -3,6 +3,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { singleshot } from "react-declarative";
 import { ethers } from 'ethers'
 
+// import detectEthereumProvider from '@metamask/detect-provider'; // ^1.2.0
+// const browserProvider = await detectEthereumProvider() as ExternalProvider;
+// if (browserProvider?.isMetaMask !== true) {
+// this.provider = new ethers.providers.Web3Provider(browserProvider);
+
 interface IWindowExtended extends Window {
     ethereum: any;
     web3: any;
@@ -31,7 +36,8 @@ export class EthersService {
     };
 
     enable = async () => {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });   
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        this.registerWalletEvents();
     };
 
     getNetwork = async () => {
@@ -52,6 +58,15 @@ export class EthersService {
         return this._provider.getCode(address);
     };
 
+    private registerWalletEvents = () => {
+      window.ethereum.on('accountsChanged', () => {
+        window.location.reload();
+      });
+      window.ethereum.on('chainChanged', () => {
+        window.location.reload();
+      });
+    };
+
     prefetch = singleshot(async () => {
         console.log("EthersService prefetch started");
         try {
@@ -59,6 +74,9 @@ export class EthersService {
                 console.log("EthersService prefetch eip-1102 detected");
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 runInAction(() => this._provider = provider);
+            }
+            if (this.isAccountEnabled) {
+                this.registerWalletEvents();
             }
         } catch (e) {
             console.warn('EthersService prefetch failed', e);

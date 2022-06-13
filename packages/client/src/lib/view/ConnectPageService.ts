@@ -18,7 +18,7 @@ export class ConnectPageService {
     };
 
     handleConnectClick = singleshot(async () => {
-        this.layoutService.setLoader(true);
+        this.layoutService.setModalLoader(true);
         try {
             if (this.ethersService.isMetamaskAvailable) {
                 await this.ethersService.enable()
@@ -28,7 +28,7 @@ export class ConnectPageService {
                 this.routerService.push('/nometamask-page');
             }
         } finally {
-            this.layoutService.setLoader(false);
+            this.layoutService.setModalLoader(false);
         }
     });
 
