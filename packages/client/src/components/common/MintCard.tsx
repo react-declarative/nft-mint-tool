@@ -158,6 +158,7 @@ const fields: TypedField[] = [
                                     display: 'flex',
                                     alignItems: 'center',
                                     marginLeft: '5px',
+                                    marginBottom: '-2.5px',
                                     gap: '5px',
                                 }}
                             >
