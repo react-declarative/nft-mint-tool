@@ -14,9 +14,8 @@ import PausedCard from '../components/common/PausedCard';
 import NotWhitelistedCard from '../components/common/NotWhitelistedCard';
 import WhitelistMintedCard from '../components/common/WhitelistMintedCard';
 import LoadingCard from '../components/common/LoadingCard';
+import SoldOutCard from '../components/common/SoldOutCard';
 import MintCard from '../components/common/MintCard';
-
-import sleep from '../utils/sleep';
 
 import ioc from '../lib/ioc';
 
@@ -58,7 +57,11 @@ export const MintPage = () => {
                     const isPaused = await ioc.contractService.isPaused();
                     const isWhiteListEnabled = await ioc.contractService.isWhitelistMintEnabled();
                     const merkleProof = ioc.merkleTreeService.getRawProofForAddress(address!);
-                    if (!isPaused) {
+                    const totalSupply = await ioc.contractService.totalSupply();
+                    const maxSupply = await ioc.contractService.maxSupply();
+                    if (totalSupply === maxSupply) {
+                        return <SoldOutCard />;
+                    } else if (!isPaused) {
                         return <MintCard />;
                     } else if (isWhiteListEnabled) {
                         if (merkleProof.length) {

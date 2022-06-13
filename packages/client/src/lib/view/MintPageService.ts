@@ -32,7 +32,8 @@ export class MintPageService {
                 return;
             }
             const isWhiteListEnabled = await this.contractService.isWhitelistMintEnabled();
-            if (isWhiteListEnabled) {
+            const isPaused = await this.contractService.isPaused();
+            if (isWhiteListEnabled && !isPaused) {
                 await this.contractService.whitelistMintTokens(quantity, quantity * cost);
             } else {
                 await this.contractService.mintTokens(quantity, quantity * cost);
