@@ -7,6 +7,7 @@ import { ethers } from 'ethers'
 // const browserProvider = await detectEthereumProvider() as ExternalProvider;
 // if (browserProvider?.isMetaMask !== true) {
 // this.provider = new ethers.providers.Web3Provider(browserProvider);
+// const rpcProvider = ethers.providers.JsonRpcProvider(url) // todo check for solana
 
 interface IWindowExtended extends Window {
     ethereum: any;
