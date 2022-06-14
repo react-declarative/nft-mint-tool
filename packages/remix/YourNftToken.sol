@@ -182,4 +182,8 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   function _baseURI() internal view virtual override returns (string memory) {
     return uriPrefix;
   }
+
+  function contractURI() public view returns (string memory) {
+    return "https://metadata-url.com/my-metadata";
+  }
 }
