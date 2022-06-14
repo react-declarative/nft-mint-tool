@@ -18,6 +18,7 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   string public uriPrefix = '';
   string public uriSuffix = '.json';
   string public hiddenMetadataUri;
+  string public contractUri;
   
   uint256 public cost;
   uint256 public maxSupply;
@@ -44,13 +45,15 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
     uint256 _cost,
     uint256 _maxSupply,
     uint256 _maxMintAmountPerTx,
-    string memory _hiddenMetadataUri
+    string memory _hiddenMetadataUri,
+    string memory _contractUri
   ) ERC721A(_tokenName, _tokenSymbol) {
     setCost(_cost);
     setMintWave(1);
     setMaxSupply(_maxSupply);
     setMaxMintAmountPerTx(_maxMintAmountPerTx);
     setHiddenMetadataUri(_hiddenMetadataUri);
+    setContractUri(_contractUri);
   }
 
   modifier mintCompliance(uint256 _mintAmount) {
@@ -154,6 +157,10 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
     hiddenMetadataUri = _hiddenMetadataUri;
   }
 
+  function setContractUri(string memory _contractUri) public onlyOwner {
+    contractUri = _contractUri;
+  }
+
   function setUriPrefix(string memory _uriPrefix) public onlyOwner {
     uriPrefix = _uriPrefix;
   }
@@ -184,6 +191,6 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
   }
 
   function contractURI() public view returns (string memory) {
-    return "https://metadata-url.com/my-metadata";
+    return contractUri;
   }
 }
