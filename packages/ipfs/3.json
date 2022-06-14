@@ -1,0 +1,44 @@
+{
+  "dna": "f78b37e90aeea1c404dd3c31ae36a5e422015a9b",
+  "name": "#3",
+  "description": "Dolia Cats is a limited collection of 9,999 gorgeous programmatically generated cat-themed NFTs on the Ethereum blockchain. Moreover, Dolia Cats NFTs will be the entry ticket to the Meowverse.",
+  "image": "ipfs://QmW7QBVJc1sS7TiC6rcKwebqCoVXufvDmKcycQkDcNTWzf/3.png",
+  "edition": 3,
+  "date": 1645696605705,
+  "home": "Meowverse",
+  "attributes": [
+    {
+      "trait_type": "Style",
+      "value": "Pech_Orange"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "White"
+    },
+    {
+      "trait_type": "Clothes",
+      "value": "Pink_Dress"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "ETH"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Scared"
+    },
+    {
+      "trait_type": "Face",
+      "value": "Yellow_Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Birthday"
+    },
+    {
+      "trait_type": "Object",
+      "value": "Phone"
+    }
+  ],
+  "compiler": "Meowverse"
+}
