@@ -12,6 +12,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 
 import Footer from './common/Footer';
 
@@ -38,10 +39,19 @@ const App = observer(() => {
       )}
       {ioc.layoutService.hasModalLoader && (
         <Backdrop
-          sx={{ zIndex: (theme: Theme) => theme.zIndex.drawer + 1 }}
+          sx={{
+            zIndex: (theme: Theme) => theme.zIndex.drawer + 1,
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 3,
+          }}
           open={ioc.layoutService.hasModalLoader}
         >
           <CircularProgress />
+          <Typography variant="body1">
+            Please approve MetaMask confirmation
+          </Typography>
         </Backdrop>
       )}
       <CssBaseline />
