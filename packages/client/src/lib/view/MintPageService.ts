@@ -5,8 +5,12 @@ import ContractService from "../base/ContractService";
 import LayoutService from "../base/LayoutService";
 import AlertService from "../base/AlertService";
 import RouterService from "../base/RouterService";
+import EthersService from "../base/EthersService";
+
+import { CC_TOKEN_TYPE, CC_CONTRACT_ADDRESS, CC_TOKEN_DECIMALS, CC_TOKEN_ICON } from '../../config';
 
 import TYPES from "../types";
+
 
 export class MintPageService {
 
@@ -14,9 +18,36 @@ export class MintPageService {
     readonly layoutService = inject<LayoutService>(TYPES.layoutService);
     readonly contractService = inject<ContractService>(TYPES.contractService);
     readonly routerService = inject<RouterService>(TYPES.routerService);
+    readonly ethersService = inject<EthersService>(TYPES.ethersService);
 
     constructor() {
         makeAutoObservable(this);
+    };
+
+    handleImportTokensClick = async () => {
+        try {
+            const wasAdded = await this.ethersService.provider.request({
+                method: 'wallet_watchAsset',
+                params: {
+                    type: CC_TOKEN_TYPE,
+                    options: {
+                        address: CC_CONTRACT_ADDRESS,
+                        symbol: await this.contractService.symbol(),
+                        decimals: CC_TOKEN_DECIMALS,
+                        image: CC_TOKEN_ICON
+                    },
+                },
+            });
+            if (wasAdded) {
+                this.alertService.notify('Token import successfull');
+            } else {
+                this.alertService.notify('Token import failed');
+            }
+        } catch (e: any) {
+            const { message = 'It looks like token impoty failed with exception. More info in debug console' } = e;
+            this.alertService.notify(message);
+            console.warn('It looks like token import failed with exception', e);
+        }
     };
 
     handleMintTokensClick = async (quantity: number, cost: number): Promise<undefined | true> => {

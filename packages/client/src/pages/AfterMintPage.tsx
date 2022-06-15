@@ -7,6 +7,8 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
+import ImportTokenCard from '../components/common/ImportTokenCard';
+
 import ioc from '../lib/ioc';
 
 const useStyles = makeStyles({
@@ -18,6 +20,7 @@ const useStyles = makeStyles({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        gap: 15,
         padding: 15,
     },
     container: {
@@ -51,6 +54,7 @@ export const ConnectPage = () => {
                     </Button>
                 </Stack>
             </Paper>
+            <ImportTokenCard />
         </Box>
     );
 };

@@ -16,6 +16,7 @@ import WhitelistMintedCard from '../components/common/WhitelistMintedCard';
 import LoadingCard from '../components/common/LoadingCard';
 import SoldOutCard from '../components/common/SoldOutCard';
 import MintCard from '../components/common/MintCard';
+import ImportTokenCard from '../components/common/ImportTokenCard';
 
 import ioc from '../lib/ioc';
 
@@ -81,6 +82,7 @@ export const MintPage = () => {
                 }}
             </Async>
             <SupplyCard />
+            <ImportTokenCard />
         </Box>
     );
 };

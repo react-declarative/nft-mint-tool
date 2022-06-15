@@ -32,6 +32,10 @@ export class EthersService {
         return !!window.ethereum?.selectedAddress;
     };
 
+    get provider() {
+        return window.ethereum;
+    };
+
     constructor() {
         makeAutoObservable(this);
     };

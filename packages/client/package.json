@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start",
+    "start:win": "set REACT_APP_STAGE=dev && react-scripts start",
     "build": "react-scripts build"
   },
   "eslintConfig": {
