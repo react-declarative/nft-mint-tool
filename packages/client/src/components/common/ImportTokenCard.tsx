@@ -15,21 +15,19 @@ import Typography from '@mui/material/Typography';
 import ioc from '../../lib/ioc';
 
 const Loader = () => (
-    <CardActionArea>
-        <CardContent>
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: 150,
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        </CardContent>
-    </CardActionArea>
+    <CardContent>
+        <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                height: 140,
+            }}
+        >
+            <CircularProgress />
+        </Box>
+    </CardContent>
 );
 
 export const ImportTokenCard = () => (
@@ -46,22 +44,20 @@ export const ImportTokenCard = () => (
                 const symbol = await ioc.contractService.symbol();
                 return (
                     <>
-                        <CardActionArea onClick={ioc.mintPageService.handleImportTokensClick}>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Import {symbol} to MetaMask
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    When a user opens their MetaMask, they are shown a variety of assets, including tokens.
-                                    You can import {symbol} token by clicking this label
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button sx={{ pointerEvents: 'none' }} size="small" color="primary">
-                                    Import token
-                                </Button>
-                            </CardActions>
-                        </CardActionArea>
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Import {symbol} to MetaMask
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                When a user opens their MetaMask, they are shown a variety of assets, including tokens.
+                                You can import {symbol} token by clicking a label
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button onClick={ioc.mintPageService.handleImportTokensClick} size="small" color="primary">
+                                Import token
+                            </Button>
+                        </CardActions>
                     </>
                 );
             }}
