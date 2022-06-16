@@ -48,13 +48,13 @@ export const ImportTokenCard = () => (
                             <Typography gutterBottom variant="h5" component="div">
                                 Import {symbol} to MetaMask
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2">
                                 When a user opens their MetaMask, they are shown a variety of assets, including tokens.
                                 You can import {symbol} token by clicking a label
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button onClick={ioc.mintPageService.handleImportTokensClick} size="small" color="primary">
+                            <Button onClick={ioc.mintPageService.handleImportTokensClick} color="primary">
                                 Import token
                             </Button>
                         </CardActions>

@@ -38,9 +38,7 @@ export class MintPageService {
                     },
                 },
             });
-            if (wasAdded) {
-                this.alertService.notify('Token import successfull');
-            } else {
+            if (!wasAdded) {
                 this.alertService.notify('Token import failed');
             }
         } catch (e: any) {
