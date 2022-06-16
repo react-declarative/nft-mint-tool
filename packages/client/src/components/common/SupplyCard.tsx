@@ -75,7 +75,7 @@ export const SupplyCard = ({
             <Typography className={classes.bold}>
                 Token Name
             </Typography>
-            <Typography>
+            <Typography variant="body2">
                 <Async Loader={Loader} throwError>
                     {async () => await ioc.contractService.name()}
                 </Async>
@@ -83,7 +83,7 @@ export const SupplyCard = ({
             <Typography className={classes.bold}>
                 Token Symbol
             </Typography>
-            <Typography>
+            <Typography variant="body2">
                 <Async Loader={Loader} throwError>
                     {async () => await ioc.contractService.symbol()}
                 </Async>
@@ -91,7 +91,7 @@ export const SupplyCard = ({
             <Typography className={classes.bold}>
                 Mint Wave
             </Typography>
-            <Typography>
+            <Typography variant="body2">
                 <Async Loader={Loader} throwError>
                     {async () => `№ ${await ioc.contractService.mintWave()}`}
                 </Async>
@@ -99,7 +99,7 @@ export const SupplyCard = ({
             <Typography className={classes.bold}>
                 Wave Price
             </Typography>
-            <Typography>
+            <Typography variant="body2">
                 <Async Loader={Loader} throwError>
                     {async () => {
                         const tokenPrice = await ioc.contractService.tokenPrice();
@@ -110,7 +110,7 @@ export const SupplyCard = ({
             <Typography className={classNames(classes.noBorder, classes.bold)}>
                 Max Amount per TX
             </Typography>
-            <Typography className={classes.noBorder}>
+            <Typography variant="body2" className={classes.noBorder}>
                 <Async Loader={Loader} throwError>
                     {async () => await ioc.contractService.maxMintAmountPerTx()}
                 </Async>

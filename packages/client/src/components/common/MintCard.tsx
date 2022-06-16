@@ -104,7 +104,7 @@ const fields: TypedField[] = [
                                 <IconButton
                                     size="small"
                                     onClick={() => onChange({
-                                        quantity: Math.max(parseInt(quantity) - 1, 0).toString(),
+                                        quantity: Math.max(parseInt(quantity || 0) - 1, 0).toString(),
                                     })}
                                 >
                                     <MinusIcon />
@@ -140,7 +140,7 @@ const fields: TypedField[] = [
                                 <IconButton
                                     size="small"
                                     onClick={() => onChange({
-                                        quantity: Math.min(parseInt(quantity) + 1, MAX_AMOUNT).toString(),
+                                        quantity: Math.min(parseInt(quantity || 0) + 1, MAX_AMOUNT).toString(),
                                     })}
                                 >
                                     <PlusIcon />
@@ -166,7 +166,7 @@ const fields: TypedField[] = [
                                 gridTemplateColumns: '1fr auto',
                             }}
                         >
-                            <Typography
+                            <Box
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -175,9 +175,13 @@ const fields: TypedField[] = [
                                     gap: '5px',
                                 }}
                             >
-                                <strong>Total price:</strong>
-                                {`${eths} ETH`}
-                            </Typography>
+                                <Typography>
+                                    <strong>Total price:</strong>
+                                </Typography>
+                                <Typography variant="body2">
+                                    {`${eths} ETH`}
+                                </Typography>
+                            </Box>
                             <Button
                                 variant="contained"
                                 onClick={() => ioc.mintPageService.handleMintTokensClick(quantity, cost)}

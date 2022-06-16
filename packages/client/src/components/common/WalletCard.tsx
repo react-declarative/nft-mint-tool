@@ -85,6 +85,7 @@ export const WalletCard = ({
                     Wallet address
                 </Typography>
                 <Typography
+                    variant="body2"
                     sx={{
                         maxWidth: 345,
                         overflow: 'hidden',
@@ -100,7 +101,7 @@ export const WalletCard = ({
                 <Typography className={classes.bold}>
                     Supply
                 </Typography>
-                <Typography>
+                <Typography variant="body2">
                     <Async Loader={Loader} throwError>
                         {async () => {
                             const totalSupply = await ioc.contractService.totalSupply();
@@ -114,7 +115,7 @@ export const WalletCard = ({
                 <Typography className={classes.bold}>
                     Sale status
                 </Typography>
-                <Typography>
+                <Typography variant="body2">
                     <Async Loader={Loader} throwError>
                         {async () => {
                             const isPaused = await ioc.contractService.isPaused();
