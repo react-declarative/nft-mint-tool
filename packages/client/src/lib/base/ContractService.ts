@@ -24,8 +24,10 @@ interface IContract extends BaseContract {
     cost: () => Promise<BigNumber>;
     mintWave: () => Promise<BigNumber>;
     whitelistClaimed: (address: string) => Promise<BigNumber>;
+    setMerkleRoot: (address: string) => Promise<void>;
     paused: () => Promise<boolean>;
     whitelistMintEnabled: () => Promise<boolean>;
+    whitelistContains: (proof: string[]) => Promise<boolean>;
     mint: (amount: string, params: Record<string, any>) => Promise<void>;  
     whitelistMint: (amount: string, proof: string[], params: Record<string, any>) => Promise<void>; 
 }
@@ -68,6 +70,20 @@ export class ContractService {
         return await this._instance.whitelistMint(amount.toString(), proof, {
             value: value.toString(),
         });
+    };
+
+    whitelistContains = async (address: string) => {
+        const merkleProof = this.merkleTreeService.getProofForAddress(address);
+        if (merkleProof.length) {
+            return await this._instance.whitelistContains(merkleProof);
+        } else {
+            return false;
+        }
+    };
+
+    updateWhiteList = async () => {
+        const root = this.merkleTreeService.getRoot();
+        await this._instance.setMerkleRoot(root);
     };
 
     prefetch = singleshot(async () => {

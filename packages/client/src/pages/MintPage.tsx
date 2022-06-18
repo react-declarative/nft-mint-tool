@@ -58,14 +58,17 @@ export const MintPage = () => {
                     const isPaused = await ioc.contractService.isPaused();
                     const isWhiteListEnabled = await ioc.contractService.isWhitelistMintEnabled();
                     const merkleProof = ioc.merkleTreeService.getRawProofForAddress(address!);
+
+                    const whitelistContains = await ioc.contractService.whitelistContains(address!);
                     const totalSupply = await ioc.contractService.totalSupply();
                     const maxSupply = await ioc.contractService.maxSupply();
+
                     if (totalSupply === maxSupply) {
                         return <SoldOutCard />;
                     } else if (!isPaused) {
                         return <MintCard />;
                     } else if (isWhiteListEnabled) {
-                        if (merkleProof.length) {
+                        if (merkleProof.length && whitelistContains) {
                             const mintWave = await ioc.contractService.mintWave();
                             const claimed = await ioc.contractService.whitelistClaimed(address!);
                             if (mintWave === claimed) {

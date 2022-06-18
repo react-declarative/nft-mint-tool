@@ -30,6 +30,9 @@ export class MerkleTreeService {
   };
 
   public getRoot() {
+    if (CC_WHITELIST_ADDRESSES.length < 2) {
+      console.warn('WhiteList must contain more than two addresses');
+    }
     return this.getMerkleTree().getHexRoot();
   };
 
