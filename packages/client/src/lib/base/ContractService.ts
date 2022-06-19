@@ -10,7 +10,7 @@ import {
 import EthersService from "./EthersService";
 import MerkleTreeService from "./MerkleTreeService";
 
-import { CC_CONTRACT_ADDRESS } from "../../config";
+import { CC_CONTRACT_ADDRESS, CC_WHITELIST_ADDRESSES } from "../../config";
 import { CC_CONTRACT_ABI } from "../../config";
 
 import TYPES from "../types";
@@ -84,6 +84,18 @@ export class ContractService {
     updateWhiteList = async () => {
         const root = this.merkleTreeService.getRoot();
         await this._instance.setMerkleRoot(root);
+    };
+
+    testWhiteList = async () => {
+        for (const address of CC_WHITELIST_ADDRESSES) {
+            const hasLocal = this.merkleTreeService.contains(address);
+            const hasRemote = await this.whitelistContains(address);
+            if (hasLocal && hasRemote) {
+                console.log(`${address} ok`)
+            } else {
+                console.warn(`${address} error local=${hasLocal} remote=${hasRemote}`)
+            }
+        }
     };
 
     prefetch = singleshot(async () => {
