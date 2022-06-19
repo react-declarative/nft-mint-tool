@@ -1,0 +1,23 @@
+{
+  "name": "nft-mint-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "remixd -s ./packages/remix -u http://localhost:8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripolskypetr/nft-mint-tool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tripolskypetr/nft-mint-tool/issues"
+  },
+  "homepage": "https://github.com/tripolskypetr/nft-mint-tool#readme",
+  "devDependencies": {
+    "@remix-project/remixd": "^0.6.2"
+  }
+}
