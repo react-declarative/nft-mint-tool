@@ -77,7 +77,7 @@ contract YourNftToken is ERC721A, Ownable, ReentrancyGuard {
     _safeMint(_msgSender(), _mintAmount);
   }
 
-  function whitelistContains(bytes32[] calldata _merkleProof) public view returns (boolean) {
+  function whitelistContains(bytes32[] calldata _merkleProof) public view returns (bool) {
     bytes32 leaf = keccak256(abi.encodePacked(_msgSender()));
     return MerkleProof.verify(_merkleProof, merkleRoot, leaf);
   }
