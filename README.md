@@ -12,9 +12,9 @@
 
 2. Import [workspace with smart contract](./packages/assets/remix-backup-2022-6-19.zip). Deploy to local [Ganache](https://trufflesuite.com/ganache/) or Ethereum testnet and copy contract address.
 
-3. Update [client config](./packages/client/src/config.ts) with contract address
+3. Update [client config](./packages/client/src/config.ts) with contract address. Run the client by executing `npm start`
 
-4. Enable mint by running `ioc.contractService._instance.setPaused(false)` or `ioc.contractService.updateWhiteList().then(() => ioc.contractService._instance.setWhitelistMintEnabled(true))`
+4. Connect local client to MetaMask with deployer account. Enable mint by running `ioc.contractService._instance.setPaused(false)` or `ioc.contractService.updateWhiteList().then(() => ioc.contractService._instance.setWhitelistMintEnabled(true))` in Chrome Dev Tools on local client instance **(npmstart-ed)**
 
 5. Enjoy)
 
