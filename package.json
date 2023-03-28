@@ -4,20 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "remixd -s ./packages/remix -u http://localhost:8080"
+    "start:ganache": "node ./scripts/run-ganache.js",
+    "start:client": "cd ./packages/client && npm start",
+    "deploy:contracts": "cd ./packages/truffle && npm start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tripolskypetr/nft-mint-tool.git"
+    "url": "git+https://github.com/react-declarative/nft-mint-tool.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tripolskypetr/nft-mint-tool/issues"
+    "url": "https://github.com/react-declarative/nft-mint-tool/issues"
   },
-  "homepage": "https://github.com/tripolskypetr/nft-mint-tool#readme",
-  "devDependencies": {
-    "@remix-project/remixd": "^0.6.2"
+  "homepage": "https://github.com/react-declarative/nft-mint-tool#readme",
+  "dependencies": {
+    "ganache-cli": "6.12.2",
+    "glob": "8.0.3",
+    "rimraf": "3.0.2"
   }
 }
