@@ -18,12 +18,13 @@ import MinusIcon from '@mui/icons-material/Remove';
 
 import weiToEth from '../../utils/weiToEth';
 
+import { CC_MAX_AMOUNT_DIGITS } from '../../config';
+
 import ioc from '../../lib/ioc';
 
-const MAX_AMOUNT_DIGITS = 5;
 const BACKDROP_DELAY = 500;
 
-const MAX_AMOUNT = 10 ** MAX_AMOUNT_DIGITS - 1;
+const MAX_AMOUNT = 10 ** CC_MAX_AMOUNT_DIGITS - 1;
 const MAX_AMOUNT_TMPL = MAX_AMOUNT.toString().split('').fill('0').join('');
 
 const useStyles = makeStyles({

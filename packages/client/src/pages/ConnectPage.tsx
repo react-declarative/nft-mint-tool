@@ -10,6 +10,7 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
 import WhitelistProofCard from '../components/common/WhitelistProofCard';
+import Logo from '../components/common/Logo';
 
 import { CC_ETHERSCAN_URL } from '../config';
 
@@ -41,7 +42,7 @@ export const ConnectPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
+                    <Logo />
                     <span>
                         Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
                         You can interact with the smart-contract <strong>directly</strong> through <Link href={CC_ETHERSCAN_URL}><strong>Etherscan</strong></Link>, without even

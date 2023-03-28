@@ -18,6 +18,8 @@ import SoldOutCard from '../components/common/SoldOutCard';
 import MintCard from '../components/common/MintCard';
 import ImportTokenCard from '../components/common/ImportTokenCard';
 
+import Logo from '../components/common/Logo';
+
 import ioc from '../lib/ioc';
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -43,13 +45,10 @@ const useStyles = makeStyles<Theme>((theme) => ({
 export const MintPage = () => {
     const classes = useStyles();
 
-    const handleReload = () => {
-        window.location.reload();
-    };
     return (
         <Box className={classes.root}>
             <Paper className={classes.title}>
-                <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')} />
+                <Logo />
             </Paper>
             <WalletCard />
             <Async Loader={LoadingCard} throwError>

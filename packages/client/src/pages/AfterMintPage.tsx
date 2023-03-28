@@ -8,8 +8,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
 import ImportTokenCard from '../components/common/ImportTokenCard';
-
-import ioc from '../lib/ioc';
+import Logo from '../components/common/Logo';
 
 const useStyles = makeStyles({
     root: {
@@ -42,7 +41,7 @@ export const ConnectPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')}  />
+                    <Logo />
                     <span>
                         <strong>Congratulations!</strong> <span className="emoji">🎉  Tokens have been <strong>minted</strong></span><br />
                     </span>

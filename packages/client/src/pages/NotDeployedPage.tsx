@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
-import ioc from '../lib/ioc';
+import Logo from '../components/common/Logo';
 
 const useStyles = makeStyles({
     root: {
@@ -39,7 +39,7 @@ export const ConnectPage = () => {
         <Box className={classes.root}>
             <Paper className={classes.container}>
                 <Stack direction='column' gap="15px">
-                    <img loading='lazy' width="100%" src={ioc.assetService.src('/logo.png')}  />
+                    <Logo />
                     <span>
                         Could not find the contract, are you connected to the right chain?<span className="emoji">😐</span><br />
                         Please reload this page and try again
