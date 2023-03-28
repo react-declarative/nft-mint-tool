@@ -37,7 +37,7 @@ export class AssetService {
         console.log("AssetService prefetch started");
         try {
             await Promise.all([
-                this.downloadImage('/logo.png'),
+                // this.downloadImage('/logo.png'),
                 this.downloadImage('/preview.png'),
             ]);
         } catch (e) {
