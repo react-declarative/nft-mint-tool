@@ -4,6 +4,11 @@
 
 This tool supports multiple mint waves and [merkle tree whitelist](https://medium.com/@ItsCuzzo/using-merkle-trees-for-nft-whitelists-523b58ada3f9) for a presale
 
+## Contribute
+
+> [!IMPORTANT]
+> There is made by using [react-declarative](https://github.com/react-declarative/react-declarative) to solve your problems. **⭐Star** and **💻Fork** It on github will be appreciated
+
 ## Screencast
 
 ![screencast](./docs/screencast.gif)
