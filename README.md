@@ -7,7 +7,7 @@ This tool supports multiple mint waves and [merkle tree whitelist](https://mediu
 ## Contribute
 
 > [!IMPORTANT]
-> There is made by using [react-declarative](https://github.com/react-declarative/react-declarative) to solve your problems. **⭐Star** and **💻Fork** It on github will be appreciated
+> Made by using [react-declarative](https://github.com/react-declarative/react-declarative) to solve your problems. **⭐Star** and **💻Fork** It on github will be appreciated
 
 ## Screencast
 
